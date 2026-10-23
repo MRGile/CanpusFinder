@@ -91,7 +91,7 @@
                     </label>
                     <div class="input-wrap" style="position:relative;">
 
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required>
+                        <input type="password" id="password" name="password" class="form-control password-input" placeholder="Masukkan password" required autocomplete="current-password">
                         <button type="button" class="password-toggle" data-target="password" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray-500);cursor:pointer;padding:0;">Tampilkan</button>
                     </div>
                 </div>

@@ -59,19 +59,23 @@
     {{--  Navigation Menu  --}}
         <nav style="padding:8px 0;" aria-label="Menu dashboard">
         <div class="sidebar-nav-section">Utama</div>
+
         @if($user?->role === 'admin')
-        <a href="{{ route('admin.universitas.index') }}" class="sidebar-nav-item {{ request()->routeIs('admin.*') ? 'active' : '' }}"><span style="flex:1;">Kelola Universitas</span></a>
+        <a href="/dashboard" class="sidebar-nav-item {{ $activeMenu === 'dashboard' ? 'active' : '' }}"><span style="flex:1;">Dashboard</span></a>
+        <a href="{{ route('admin.universitas.index') }}" class="sidebar-nav-item {{ request()->routeIs('admin.universitas.*') ? 'active' : '' }}"><span style="flex:1;">Kelola Universitas</span></a>
+        <a href="{{ route('admin.beasiswa.index') }}" class="sidebar-nav-item {{ request()->routeIs('admin.beasiswa.*') ? 'active' : '' }}"><span style="flex:1;">Kelola Beasiswa</span></a>
+        <a href="{{ route('admin.blog.index') }}" class="sidebar-nav-item {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}"><span style="flex:1;">Kelola Blog</span></a>
         @else
         <a href="/kampus" class="sidebar-nav-item"><span style="flex:1;">Cari Universitas</span></a>
         @endif
-        <a href="/dashboard" class="sidebar-nav-item {{ $activeMenu === 'dashboard' ? 'active' : '' }}"><span style="flex:1;">Dashboard</span></a>
+
         <a href="/favorit" class="sidebar-nav-item {{ $activeMenu === 'favorit' ? 'active' : '' }}"><span style="flex:1;">Kampus Favorit</span></a>
         {{-- <a href="/bandingkan" class="sidebar-nav-item {{ $activeMenu === 'bandingkan' ? 'active' : '' }}"><span style="flex:1;">Perbandingan</span></a> --}}
         <div class="sidebar-nav-section">Informasi</div>
         <a href="/notifikasi" class="sidebar-nav-item {{ $activeMenu === 'notifikasi' ? 'active' : '' }}"><span style="flex:1;">Notifikasi</span></a>
         <div class="sidebar-nav-section">Akun</div>
         <a href="/profil" class="sidebar-nav-item {{ $activeMenu === 'profil' ? 'active' : '' }}"><span style="flex:1;">Profil Saya</span></a>
-        <a href="/pengaturan" class="sidebar-nav-item {{ $activeMenu === 'pengaturan' ? 'active' : '' }}"><span style="flex:1;">Pengaturan</span></a>
+        {{-- <a href="/pengaturan" class="sidebar-nav-item {{ $activeMenu === 'pengaturan' ? 'active' : '' }}"><span style="flex:1;">Pengaturan</span></a> --}}
     </nav>
 
     <div style="margin:12px 16px;padding:16px;border:1px solid var(--gray-200);border-radius:10px;">

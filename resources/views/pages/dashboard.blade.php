@@ -32,7 +32,7 @@
     <div style="display:flex;flex-direction:column;gap:12px;">
         @forelse($favoriteCampuses as $campus)
         <div style="display:flex;align-items:center;gap:14px;padding:12px;background:var(--gray-100);border-radius:10px;">
-            <div style="width:40px;height:40px;border-radius:10px;background:{{ $campus->logo_color }};color:{{ $campus->logo_text_color }};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.82rem;flex-shrink:0;">{{ $campus->abbreviation }}</div>
+            <div style="width:40px;height:40px;border-radius:10px;background:{{ $campus->logo_color }};color:{{ $campus->logo_text_color }};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.82rem;flex-shrink:0;overflow:hidden;">@if($campus->logo_path)<img src="{{ asset('storage/'.$campus->logo_path) }}" alt="Logo {{ $campus->name }}" style="width:100%;height:100%;object-fit:contain;padding:3px;">@else{{ $campus->abbreviation }}@endif</div>
             <div style="flex:1;">
                 <div style="font-size:0.88rem;font-weight:700;">{{ $campus->name }}</div>
                 <div style="font-size:0.75rem;color:var(--gray-500);">{{ $campus->city }} · {{ $campus->accreditation }}</div>
@@ -56,7 +56,7 @@
             
             <div style="flex:1;">
                 <div style="font-size:0.87rem;font-weight:600;">{{ $scholarship->name }}</div>
-                <div style="font-size:0.75rem;color:var(--gray-500);">Deadline: {{ $scholarship->deadline_label }}</div>
+                <div style="font-size:0.75rem;color:var(--gray-500);">Deadline: {{ $scholarship->deadline->format('d/m/Y') }}</div>
             </div>
             <span style="background:{{ $scholarship->background_color }};color:{{ $scholarship->text_color }};padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:700;">{{ $scholarship->scholarship_type }}</span>
         </div>

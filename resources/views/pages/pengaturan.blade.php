@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+{{-- @extends('layouts.dashboard')
 
 @section('title', 'Pengaturan - CampusFinder')
 @php $activeMenu = 'pengaturan'; @endphp
@@ -21,4 +21,4 @@
     </div>
     <a href="/profil" class="btn btn-primary" style="margin-top:20px;">Lihat Profil</a>
 </div>
-@endsection
+@endsection --}}

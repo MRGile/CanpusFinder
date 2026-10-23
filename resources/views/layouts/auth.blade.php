@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'CampusFinder') – Temukan Kampus Impianmu</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/campusfinder-logo.png') }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +21,7 @@
                    align-items:center;justify-content:space-between;padding:0 32px;
                    box-shadow:var(--shadow-sm);">
         <a href="/" class="navbar-brand">
-            
+            <img class="brand-logo" src="{{ asset('images/campusfinder-logo.png') }}" alt="" width="42" height="42">
             Campus<span class="highlight">Finder</span>
         </a>
         <div style="display:flex;align-items:center;gap:12px;">

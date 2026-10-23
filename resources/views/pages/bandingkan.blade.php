@@ -48,7 +48,7 @@
                         @foreach($selectedCampuses as $campus)
                         <th>
                             <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-                                <div style="width:40px;height:40px;background:{{ $campus->logo_color }};color:{{ $campus->logo_text_color }};border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;">{{ $campus->abbreviation }}</div>
+                                <div style="width:40px;height:40px;background:{{ $campus->logo_color }};color:{{ $campus->logo_text_color }};border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;overflow:hidden;">@if($campus->logo_path)<img src="{{ asset('storage/'.$campus->logo_path) }}" alt="Logo {{ $campus->name }}" style="width:100%;height:100%;object-fit:contain;padding:3px;">@else{{ $campus->abbreviation }}@endif</div>
                                 <span>{{ $campus->name }}</span>
                             </div>
                         </th>
@@ -60,8 +60,8 @@
                     <tr><td>Akreditasi</td>@foreach($selectedCampuses as $campus)<td>{{ $campus->accreditation }}</td>@endforeach</tr>
                     <tr><td>Kota</td>@foreach($selectedCampuses as $campus)<td>{{ $campus->city }}</td>@endforeach</tr>
                     <tr><td>Jumlah Program Studi</td>@foreach($selectedCampuses as $campus)<td>{{ $campus->program_count }}</td>@endforeach</tr>
-                    <tr><td>Rating</td>@foreach($selectedCampuses as $campus)<td>{{ $campus->rating }}</td>@endforeach</tr>
-                    <tr><td>Jumlah Ulasan</td>@foreach($selectedCampuses as $campus)<td>{{ number_format($campus->review_count) }}</td>@endforeach</tr>
+                    <tr><td>Rating pengguna</td>@foreach($selectedCampuses as $campus)<td>{{ $campus->reviews_count ? number_format((float) $campus->reviews_avg_rating, 1) : 'Belum ada ulasan' }}</td>@endforeach</tr>
+                    <tr><td>Jumlah Ulasan</td>@foreach($selectedCampuses as $campus)<td>{{ number_format($campus->reviews_count) }}</td>@endforeach</tr>
                     <tr><td>Peringkat</td>@foreach($selectedCampuses as $campus)<td>{{ $campus->rank ?: 'Belum tersedia' }}</td>@endforeach</tr>
                     <tr><td></td>@foreach($selectedCampuses as $campus)<td><a href="/kampus/{{ $campus->slug }}" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Lihat Detail</a></td>@endforeach</tr>
                 </tbody>

@@ -37,7 +37,7 @@
             {{-- Brand & About --}}
             <div class="footer-brand">
                 <a href="/" class="navbar-brand" style="color:white;display:inline-flex;margin-bottom:16px;">
-                    
+                    <img class="brand-logo" src="{{ asset('images/campusfinder-logo.png') }}" alt="" width="42" height="42">
                     Campus<span class="highlight">Finder</span>
                 </a>
 

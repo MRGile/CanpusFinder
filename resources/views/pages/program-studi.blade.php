@@ -8,7 +8,7 @@
         <div class="page-hero-content">
             <div class="section-badge"> Program Studi</div>
             <h1 class="page-hero-title">Temukan Program Studi yang Tepat</h1>
-            <p class="page-hero-subtitle">Jelajahi pilihan program studi dan temukan kampus yang sesuai dengan minatmu.</p>
+            <p class="page-hero-subtitle">Jelajahi {{ number_format($programs->total()) }} program studi yang tersedia di katalog dan temukan bidang yang sesuai dengan minatmu.</p>
         </div>
     </div>
 </section>
@@ -24,15 +24,18 @@
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
             @forelse($programs as $program)
-            <a href="/program-studi/{{ Illuminate\Support\Str::slug($program->name) }}" class="card" style="padding:22px;display:block;color:inherit;">
-                
-                <h2 style="font-size:1rem;font-weight:700;margin-bottom:6px;">{{ $program->name }}</h2>
-                <p style="font-size:0.82rem;color:var(--gray-600);">{{ $program->category }}</p>
+            <a href="{{ route('programs.show', $program->slug) }}" class="card" style="padding:22px;display:flex;gap:14px;align-items:flex-start;color:inherit;text-decoration:none;transition:transform .16s ease,box-shadow .16s ease;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+                <div><h2 style="font-size:1rem;font-weight:700;margin:0 0 6px;">{{ $program->name }}</h2>
+                    <p style="font-size:0.82rem;color:var(--gray-600);margin:0;">{{ $program->category }}</p>
+                    <p style="font-size:.78rem;color:var(--gray-500);margin:8px 0 0;">{{ $program->university_count }} universitas</p>
+                </div>
+                <span aria-hidden="true" style="margin-left:auto;color:var(--primary);font-weight:700;white-space:nowrap;">Lihat detail →</span>
             </a>
             @empty
             <div class="card" style="padding:22px;">Program studi tidak ditemukan.</div>
             @endforelse
         </div>
+        @include('partials.catalog-pagination', ['paginator' => $programs])
     </div>
 </section>
 @endsection

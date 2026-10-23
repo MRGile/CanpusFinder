@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard') – CampusFinder</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/campusfinder-logo.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +25,7 @@
 
         {{-- Brand --}}
         <a href="/" class="navbar-brand d-flex align-items-center gap-2 text-decoration-none">
-            <span class="d-inline-flex align-items-center justify-content-center rounded-3 text-white fw-bold" style="width:36px;height:36px;background:#2563eb;">CF</span>
+            <img class="brand-logo" src="{{ asset('images/campusfinder-logo.png') }}" alt="" width="38" height="38">
             <span class="fw-bold text-primary-emphasis">CampusFinder</span>
         </a>
 

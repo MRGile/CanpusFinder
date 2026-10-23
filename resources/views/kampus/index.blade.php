@@ -40,7 +40,7 @@
                     <label>Provinsi / Kota</label>
                     <select name="kota" class="search-select">
                         <option value="">Semua Kota</option>
-                        @foreach($campuses->pluck('city')->unique() as $kota)
+                        @foreach($filterCities as $kota)
                         <option {{ request('kota') == $kota ? 'selected' : '' }}>{{ $kota }}</option>
                         @endforeach
                     </select>
@@ -82,7 +82,7 @@
                 <!-- Sort & Count Bar -->
                 <div style="display:flex;align-items:center;justify-content:space-between;background:white;border-radius:12px;padding:14px 20px;border:1px solid var(--gray-200);margin-bottom:20px;flex-wrap:wrap;gap:12px;">
                     <div style="font-size:0.88rem;color:var(--gray-600);">
-                        Menampilkan <strong style="color:var(--dark);">{{ $campuses->count() }}</strong> universitas
+                        Menampilkan <strong style="color:var(--dark);">{{ $campuses->total() }}</strong> universitas
                         @if(request('q'))<span> untuk "<strong>{{ request('q') }}</strong>"</span>@endif
                         @if(request('fakultas'))<span> dengan fakultas "<strong>{{ request('fakultas') }}</strong>"</span>@endif
                     </div>
@@ -101,13 +101,13 @@
                     <div class="campus-card">
                         <div class="campus-card-image" style="background: {{ $kampus->cover_gradient }};">
                             @if($kampus->image_path)<img src="{{ asset('storage/'.$kampus->image_path) }}" alt="Foto {{ $kampus->name }}" style="position:absolute;inset:0;">@else<span style="font-size:3rem;font-weight:900;color:rgba(255,255,255,0.18);font-family:var(--font-main);">{{ $kampus->abbreviation }}</span>@endif
-                            <span class="campus-type-badge {{ $kampus->type === 'Negeri' ? 'badge-negeri' : 'badge-swasta' }}">{{ $kampus->type }}</span>
+                            <span class="campus-type-badge {{ $kampus->typeBadgeClass() }}">{{ $kampus->type }}</span>
                             @auth<form method="POST" action="{{ route('campus.favorite.toggle', $kampus->slug) }}">@csrf<button class="campus-fav-btn" type="submit" aria-label="Simpan favorit">Simpan</button></form>@else<a class="campus-fav-btn" href="/masuk" aria-label="Masuk untuk menyimpan favorit">Simpan</a>@endauth
                             <span class="campus-rank-badge">{{ $kampus->rank }}</span>
                         </div>
                         <div class="campus-card-body">
                             <div class="campus-logo-row">
-                                <div class="campus-logo" style="background:{{ $kampus->logo_color }};color:{{ $kampus->logo_text_color }};">{{ $kampus->abbreviation }}</div>
+                                <div class="campus-logo" style="background:{{ $kampus->logo_color }};color:{{ $kampus->logo_text_color }};overflow:hidden;">@if($kampus->logo_path)<img src="{{ asset('storage/'.$kampus->logo_path) }}" alt="Logo {{ $kampus->name }}" style="width:100%;height:100%;object-fit:contain;padding:4px;">@else{{ $kampus->abbreviation }}@endif</div>
                                 <div>
                                     <div class="campus-card-title">{{ $kampus->name }}</div>
                                     <div class="campus-card-location">
@@ -127,11 +127,11 @@
                                 </div>
                                 <div class="campus-rating">
                                     
-                                    <span>{{ $kampus->rating }}</span>
+                                    <span>{{ $kampus->reviews_count ? number_format((float) $kampus->reviews_avg_rating, 1) : '—' }}</span>
                                 </div>
                             </div>
                             <div class="campus-card-footer">
-                                <span class="campus-prodi-count">{{ number_format($kampus->review_count) }} ulasan</span>
+                                <span class="campus-prodi-count">{{ number_format($kampus->reviews_count) }} ulasan</span>
                                 <a href="/kampus/{{ $kampus->slug }}" class="btn-detail">Detail</a>
                             </div>
                         </div>
@@ -141,16 +141,7 @@
                     @endforelse
                 </div>
 
-                <!-- Pagination -->
-                <div class="pagination">
-                    <button class="page-btn disabled" disabled>Sebelumnya</button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <span style="color:var(--gray-500);font-size:0.88rem;">...</span>
-                    <button class="page-btn">452</button>
-                    <button class="page-btn">Berikutnya</button>
-                </div>
+                @include('partials.catalog-pagination', ['paginator' => $campuses])
             </div>
         </div>
     </div>

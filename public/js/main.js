@@ -113,6 +113,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
+
+        const hashTarget = window.location.hash.slice(1);
+        const matchingTab = Array.from(tabs).find(tab => tab.dataset.tab === hashTarget);
+        if (matchingTab) matchingTab.click();
     });
 
     // ========================================
@@ -183,22 +187,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { threshold: 0.5 });
         counterEls.forEach(el => counterObserver.observe(el));
     }
-
-    // ========================================
-    // SEARCH FORM: Basic validation
-    // ========================================
-    const searchForms = document.querySelectorAll('.search-form');
-    searchForms.forEach(function (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Redirect to kampus list page with query params
-            const input = form.querySelector('.search-input');
-            const val = input ? input.value.trim() : '';
-            if (val) {
-                window.location.href = '/kampus?q=' + encodeURIComponent(val);
-            }
-        });
-    });
 
     // ========================================
     // RESPONSIVE: Window resize handler

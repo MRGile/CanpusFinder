@@ -12,7 +12,7 @@
 <div style="display:flex;flex-direction:column;gap:12px;">
     @forelse($campuses as $campus)
     <div class="card" style="display:flex;align-items:center;gap:14px;padding:16px;">
-        <div style="width:44px;height:44px;border-radius:10px;background:{{ $campus->logo_color }};color:{{ $campus->logo_text_color }};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.82rem;flex-shrink:0;">{{ $campus->abbreviation }}</div>
+        <div style="width:44px;height:44px;border-radius:10px;background:{{ $campus->logo_color }};color:{{ $campus->logo_text_color }};display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.82rem;flex-shrink:0;overflow:hidden;">@if($campus->logo_path)<img src="{{ asset('storage/'.$campus->logo_path) }}" alt="Logo {{ $campus->name }}" style="width:100%;height:100%;object-fit:contain;padding:3px;">@else{{ $campus->abbreviation }}@endif</div>
         <div style="flex:1;">
             <h2 style="font-size:0.9rem;font-weight:700;">{{ $campus->name }}</h2>
             <p style="font-size:0.78rem;color:var(--gray-500);">{{ $campus->city }} · Akreditasi {{ $campus->accreditation }}</p>

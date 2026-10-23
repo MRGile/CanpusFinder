@@ -6,6 +6,7 @@
     <title>@yield('title', 'CampusFinder') – Temukan Kampus Impianmu</title>
     <meta name="description" content="@yield('meta_description', 'Platform terlengkap untuk mencari kampus terbaik di Indonesia.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/campusfinder-logo.png') }}">
 {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

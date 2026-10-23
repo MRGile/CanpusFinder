@@ -4,13 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CampusContent extends Model
 {
-    protected $fillable = ['kind', 'title', 'subtitle', 'description', 'value', 'icon', 'color', 'text_color', 'metric', 'sort_order'];
+    protected $fillable = ['kind', 'title', 'subtitle', 'study_level', 'faculty_id', 'description', 'value', 'icon', 'color', 'text_color', 'metric', 'sort_order'];
+
+    public function campus(): BelongsTo
+    {
+        return $this->belongsTo(Campus::class);
+    }
+
+    public function faculty(): BelongsTo
+    {
+        return $this->belongsTo(Faculty::class);
+    }
 
     public function scopeOrdered(Builder $query): Builder
     {
-        return $query->orderBy('sort_order');
+        return $query->orderBy('sort_order')->orderBy('id');
     }
 }

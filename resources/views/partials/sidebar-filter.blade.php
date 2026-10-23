@@ -3,7 +3,7 @@
         @if(request('q'))<input type="hidden" name="q" value="{{ request('q') }}">@endif
         @if(request('fakultas'))<input type="hidden" name="fakultas" value="{{ request('fakultas') }}">@endif
         <div style="background:var(--primary);padding:16px 20px;color:white;">
-            <h3 style="font-size:0.92rem;font-weight:700;">Filter Kampus</h3>
+            <h3 style="font-size:0.92rem;font-weight:700; color:white;">Filter Kampus</h3>
         </div>
         <div style="padding:20px;">
             <label for="filter-city" style="display:block;font-size:0.8rem;font-weight:700;margin-bottom:8px;">Kota</label>

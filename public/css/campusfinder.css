@@ -102,6 +102,13 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.35rem;
     color: var(--primary);
 }
+.brand-logo {
+    display: block;
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
 .navbar-brand span.highlight { color: var(--accent); }
 
 .navbar-nav {
@@ -387,15 +394,26 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.9rem;
     flex-shrink: 0;
 }
-.mini-campus-info h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; }
+.mini-campus-info { flex: 1; min-width: 0; }
+.mini-campus-info h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; overflow-wrap: anywhere; }
 .mini-campus-info p { font-size: 0.75rem; color: var(--gray-600); }
 .mini-campus-badge {
     margin-left: auto;
-    padding: 3px 10px;
-    border-radius: 20px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    background: transparent;
+    box-shadow: none;
 }
+.mini-campus-badge.badge-negeri { color: #047857; }
+.mini-campus-badge.badge-swasta { color: #B45309; }
+.mini-campus-badge.badge-kedinasan { color: #6D28D9; }
+.mini-campus-badge.badge-vokasi { color: #BE123C; }
 
 /* ========================================
    SEARCH SECTION
@@ -594,6 +612,13 @@ h1, h2, h3, h4, h5, h6 {
 .badge-swasta { background: #FEF3C7; color: #92400E; }
 .badge-kedinasan { background: #EDE9FE; color: #5B21B6; }
 .badge-vokasi { background: #FFE4E6; color: #9F1239; }
+.campus-detail-hero .campus-type-badge {
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #FFFFFF;
+    font-weight: 800;
+}
 .campus-fav-btn { position: absolute; top: 14px; right: 14px; padding: 7px 10px; background: white; border: 0; border-radius: 8px; color: var(--gray-700); box-shadow: var(--shadow-sm); transition: var(--transition); font-size: 0.75rem; font-weight: 600; cursor: pointer; text-decoration: none; }
 .campus-fav-btn:hover { transform: scale(1.15); }
 .campus-fav-btn.active svg { color: var(--danger); }
@@ -1194,6 +1219,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-error { font-size: 0.78rem; color: var(--danger); margin-top: 4px; }
 .form-hint { font-size: 0.78rem; color: var(--gray-500); margin-top: 4px; }
 .input-wrap .form-control { padding-left: 14px; }
+.input-wrap .password-input { padding-right: 112px; }
 .form-check {
     display: flex;
     align-items: center;

@@ -19,8 +19,8 @@ class AccountController extends Controller
             ->with('favoriteCampuses', $user->favoriteCampuses()->orderByPivot('created_at', 'desc')->limit(3)->get())
             ->with('favoriteCount', $user->favoriteCampuses()->count())
             ->with('campusCount', Campus::query()->count())
-            ->with('scholarshipCount', Scholarship::query()->count())
-            ->with('scholarships', Scholarship::query()->ordered()->limit(3)->get());
+            ->with('scholarshipCount', Scholarship::query()->notExpired()->count())
+            ->with('scholarships', Scholarship::query()->notExpired()->ordered()->limit(3)->get());
     }
 
     public function favorites(Request $request): View

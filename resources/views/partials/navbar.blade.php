@@ -15,7 +15,7 @@
 
             {{--  BRAND  --}}
             <a href="/" class="navbar-brand" aria-label="CampusFinder - Halaman Utama">
-                
+                <img class="brand-logo" src="{{ asset('images/campusfinder-logo.png') }}" alt="" width="42" height="42">
                 Campus<span class="highlight">Finder</span>
             </a>
 

@@ -18,6 +18,26 @@
     @if($errors->any())<div class="alert alert-danger" role="alert"><i class="bi bi-exclamation-circle me-2"></i>{{ $errors->first() }}</div>@endif
 
     <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header bg-white border-bottom py-3"><h2 class="h6 fw-bold mb-1"><i class="bi bi-patch-check me-2 text-primary"></i>Logo universitas</h2><p class="small text-secondary mb-0">Logo tampil sebagai identitas kampus di katalog dan halaman detail.</p></div>
+        <div class="card-body p-4">
+            <div class="row align-items-center g-4">
+                @if($campus->logo_path)
+                <div class="col-sm-auto"><img src="{{ asset('storage/'.$campus->logo_path) }}" alt="Logo {{ $campus->name }}" class="rounded-3 border bg-white p-2" style="width:112px;height:112px;object-fit:contain;" id="campusLogoPreview"></div>
+                @else
+                <div class="col-sm-auto d-none" id="campusLogoPreviewWrap"><img src="" alt="Pratinjau logo universitas" class="rounded-3 border bg-white p-2" style="width:112px;height:112px;object-fit:contain;" id="campusLogoPreview"></div>
+                @endif
+                <div class="col">
+                    <label for="logo" class="form-label">{{ $campus->logo_path ? 'Ganti logo' : 'Pilih file logo' }}</label>
+                    <input id="logo" name="logo" type="file" accept="image/jpeg,image/png,image/webp" class="form-control @error('logo') is-invalid @enderror">
+                    <div class="form-text">PNG dengan latar transparan paling cocok. Format JPG, PNG, atau WebP, maksimal 2 MB.</div>
+                    @error('logo')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    @if($campus->logo_path)<div class="form-check mt-3"><input class="form-check-input" type="checkbox" value="1" id="remove_logo" name="remove_logo"><label class="form-check-label text-danger" for="remove_logo">Hapus logo saat disimpan</label></div>@endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
         <div class="card-header bg-white border-bottom py-3"><h2 class="h6 fw-bold mb-1"><i class="bi bi-image me-2 text-primary"></i>Foto universitas</h2><p class="small text-secondary mb-0">Unggah foto kampus agar tampil di katalog dan halaman detail.</p></div>
         <div class="card-body p-4">
             <div class="row align-items-center g-4">
@@ -83,6 +103,15 @@ document.getElementById('image')?.addEventListener('change', function (event) {
 
     const preview = document.getElementById('campusImagePreview');
     const wrap = document.getElementById('campusImagePreviewWrap');
+    preview.src = URL.createObjectURL(file);
+    wrap?.classList.remove('d-none');
+});
+document.getElementById('logo')?.addEventListener('change', function (event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const preview = document.getElementById('campusLogoPreview');
+    const wrap = document.getElementById('campusLogoPreviewWrap');
     preview.src = URL.createObjectURL(file);
     wrap?.classList.remove('d-none');
 });

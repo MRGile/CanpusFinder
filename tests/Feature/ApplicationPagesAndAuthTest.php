@@ -11,11 +11,13 @@ class ApplicationPagesAndAuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_missing_public_pages_render_successfully(): void
+    public function test_public_catalog_pages_render_and_unknown_programs_return_not_found(): void
     {
-        foreach (['/program-studi', '/program-studi/teknik-informatika', '/blog'] as $path) {
+        foreach (['/program-studi', '/blog'] as $path) {
             $this->get($path)->assertOk();
         }
+
+        $this->get('/program-studi/teknik-informatika')->assertNotFound();
     }
 
     public function test_dashboard_pages_redirect_guests_to_login(): void
@@ -42,7 +44,7 @@ class ApplicationPagesAndAuthTest extends TestCase
             'email' => 'rina@example.test',
             'phone' => '08123456789',
             'password' => 'secure-pass-123',
-            'role' => 'siswa',
+            'role' => 'admin',
             'agree' => '1',
         ]);
 
@@ -52,7 +54,7 @@ class ApplicationPagesAndAuthTest extends TestCase
             'name' => 'Rina Putri',
             'email' => 'rina@example.test',
             'phone' => '08123456789',
-            'role' => 'siswa',
+            'role' => 'pengguna',
         ]);
     }
 
